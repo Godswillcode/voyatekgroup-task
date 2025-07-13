@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "./axiosInstance";
-import { IHotel } from "../types/hotels";
+import { IAttraction } from "../types/attractions";
 
 interface AttractionsParams {
   startDate?: string;
@@ -30,7 +30,7 @@ export const useGetAttractions = (
           },
         }
       );
-      const res = response.data as IHotel;
+      const res = response.data as IAttraction;
       return res;
     },
     enabled,

@@ -1,10 +1,25 @@
 "use client";
 
-import { DatePicker, Form, InputNumber, Select } from "antd";
+import { DatePicker, Form, InputNumber, Pagination, Select } from "antd";
 import React, { useState } from "react";
+import { useGetAttractions } from "../hooks/useGetAttractions";
+import { usePagination } from "../hooks/usePagination";
+import { AttractionFeatureCard } from "../components/featureMainCard/AttractionFeatureCard";
 
 const ActivitiesPage = () => {
   const [searchParams, setSearchParams] = useState<any>(null);
+  const { data, isLoading, error } = useGetAttractions(
+    searchParams,
+    !!searchParams
+  );
+
+  const activities = data?.data?.products || [];
+
+  const { currentPage, paginatedData, changePage, totalItems } = usePagination(
+    activities,
+    5
+  );
+
   const onFinish = (values: any) => {
     const start_date = values?.date?.[0]?.format("YYYY-MM-DD");
     const end_date = values?.date?.[1]?.format("YYYY-MM-DD");
@@ -19,6 +34,7 @@ const ActivitiesPage = () => {
 
     setSearchParams(params);
   };
+
   return (
     <div>
       <div className="border rounded-md p-3">
@@ -55,6 +71,30 @@ const ActivitiesPage = () => {
           </div>
         </Form>
       </div>
+      <div className="mt-6">
+        {isLoading && <p>Loading activities...</p>}
+        {error && <p className="text-red-500">Failed to fetch activities</p>}
+      </div>
+
+        {/* Data display */}
+        {paginatedData.length > 0 ? (
+        <div className="mt-4">
+          {paginatedData.map((activity) => (
+             <AttractionFeatureCard key={activity.id} data={activity} />
+          ))}
+
+          <div className="flex justify-center mt-8">
+            <Pagination
+              current={currentPage}
+              total={totalItems}
+              pageSize={10}
+              onChange={changePage}
+            />
+          </div>
+        </div>
+      ) : (
+        !isLoading && <div></div>
+      )}
     </div>
   );
 };
