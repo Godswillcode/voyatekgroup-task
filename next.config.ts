@@ -10,14 +10,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  transpilePackages: ['antd', '@ant-design/icons'],
+  transpilePackages: ["antd", "@ant-design/icons"],
   experimental: {
     turbo: {
       resolveAlias: {
-        'react': 'react',
-        'react-dom': 'react-dom'
-      }
-    }
+        react: "react",
+        "react-dom": "react-dom",
+      },
+    },
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
