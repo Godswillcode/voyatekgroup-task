@@ -18,7 +18,7 @@ export const useGetHotels = (params: UseHotelsParams | null, enabled = true) => 
   return useQuery({
     queryKey: ["hotels", params],
     queryFn: async () => {
-      const response = await axiosInstance.get("/hotels/searchHotels?query=lagos", {
+      const response = await axiosInstance.get("/hotels/searchHotels", {
         params: {
           ...params,
           dest_id: "-2092174",

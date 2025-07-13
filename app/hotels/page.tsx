@@ -8,19 +8,11 @@ import {
   generalValidationRules,
 } from "../lib/validations";
 import { useGetHotels } from "../hooks/useGetHotels";
-import { Icon } from "@iconify/react";
 import { usePagination } from "../hooks/usePagination";
-import { useCurrencyFormatter } from "../lib/useCurrencyFormatter";
-import { getNightsStay } from "../lib/getNightsStay";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import { useReverseGeocode } from "../hooks/useReverseGeocode";
 import { HotelFeatureCard } from "../components/featureMainCard/HotelFeatureCard";
 
 export default function HotelPage() {
   const [searchParams, setSearchParams] = useState<any>(null);
-  const { formatCurrency } = useCurrencyFormatter();
   const { data, error, isLoading } = useGetHotels(searchParams, !!searchParams);
 
   const hotels = data?.data?.hotels || [];
