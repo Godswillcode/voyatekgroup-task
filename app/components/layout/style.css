@@ -1,0 +1,28 @@
+.navLinkWrap {
+  @apply flex px-4 justify-between mb-2;
+}
+
+.navLink {
+  @apply flex items-center gap-2;
+}
+
+.navIcon {
+  @apply text-[22px] text-accent;
+}
+
+.navLink span {
+  @apply text-[12px];
+}
+
+.navLink.active span {
+  @apply text-primary font-medium;
+}
+
+.navIcon.active {
+  @apply text-primary;
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
