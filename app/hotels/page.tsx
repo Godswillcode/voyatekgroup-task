@@ -79,7 +79,7 @@ export default function HotelPage() {
               <Input className="w-full" placeholder="0,17" />
             </Form.Item>
           </div>
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end mt-2">
             <button
               type="submit"
               className="w-[10rem] bg-primary text-white px-4 pt-1 pb-2 rounded"

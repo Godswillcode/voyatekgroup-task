@@ -13,7 +13,6 @@ interface AttractionsParams {
 
 export const useGetAttractions = (
   params: AttractionsParams | null,
-  enabled = true
 ) => {
   return useQuery({
     queryKey: ["hotels", params],
@@ -33,7 +32,6 @@ export const useGetAttractions = (
       const res = response.data as IAttraction;
       return res;
     },
-    enabled,
     // staleTime: 1000 * 60 * 5,
   });
 };

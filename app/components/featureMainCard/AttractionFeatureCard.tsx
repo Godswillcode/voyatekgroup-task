@@ -11,10 +11,12 @@ import { useActivityItinerary } from "@/app/hooks/useActivityItinerary";
 
 interface ActivityCardProps {
   data: IAttractionItem;
+  index: number;
 }
 
 export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
   data,
+  index,
 }) => {
   const [messageApi, contextHolder] = antdMessage.useMessage();
 
@@ -45,7 +47,7 @@ export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
             <img
               src={data.primaryPhoto.small}
               alt={`Activity Image ${data.name}`}
-              className="object-cover w-full h-full md:h-[11rem]"
+              className="object-cover w-full h-full md:h-[12rem]"
             />
           </div>
           <div className="flex-1 flex flex-col justify-between px-3 pt-2 gap-2">
@@ -98,17 +100,19 @@ export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
                 </Tooltip>
               </div>
               <div className="flex items-center gap-2">
-                <Button>Day 1</Button>
-                <div className="flex items-center flex-col">
+                <Button type="primary" size="small">
+                  Day {index + 1}
+                </Button>
+                <div className="flex items-center flex-col gap-1">
                   <Icon
                     icon="material-symbols-light:arrow-circle-down-outline"
-                    height="20"
-                    width="20"
+                    height="15"
+                    width="15"
                   />
                   <Icon
                     icon="material-symbols-light:arrow-circle-up-outline"
-                    height="20"
-                    width="20"
+                    height="15"
+                    width="15"
                   />
                 </div>
               </div>

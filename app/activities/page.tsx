@@ -8,10 +8,7 @@ import { AttractionFeatureCard } from "../components/featureMainCard/AttractionF
 
 const ActivitiesPage = () => {
   const [searchParams, setSearchParams] = useState<any>(null);
-  const { data, isLoading, error } = useGetAttractions(
-    searchParams,
-    !!searchParams
-  );
+  const { data, isLoading, error } = useGetAttractions(searchParams);
 
   const activities = data?.data?.products || [];
 
@@ -61,12 +58,12 @@ const ActivitiesPage = () => {
               <InputNumber className="w-full" min={1} placeholder="1" />
             </Form.Item>
           </div>
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end mt-2">
             <button
               type="submit"
               className="w-[10rem] bg-primary text-white px-4 pt-1 pb-2 rounded"
             >
-              Search
+              Filter
             </button>
           </div>
         </Form>
@@ -76,11 +73,11 @@ const ActivitiesPage = () => {
         {error && <p className="text-red-500">Failed to fetch activities</p>}
       </div>
 
-        {/* Data display */}
-        {paginatedData.length > 0 ? (
+      {/* Data display */}
+      {paginatedData.length > 0 ? (
         <div className="mt-4">
-          {paginatedData.map((activity) => (
-             <AttractionFeatureCard key={activity.id} data={activity} />
+          {paginatedData.map((activity, index) => (
+            <AttractionFeatureCard index={index} key={activity.id} data={activity} />
           ))}
 
           <div className="flex justify-center mt-8">
