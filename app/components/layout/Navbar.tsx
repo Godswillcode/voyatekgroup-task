@@ -17,7 +17,7 @@ export const Navbar = () => {
   return (
     <div className="bg-white mb-5 py-3 w-full top-0 sticky z-40 Container flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <Image src={logo} alt="logo" className="h-8 w-8" />
+       <Link href="/"> <Image src={logo} alt="logo" className="h-8 w-8" /></Link>
         <SearchBox />
       </div>
 
