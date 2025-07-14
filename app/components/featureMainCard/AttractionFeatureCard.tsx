@@ -92,7 +92,7 @@ export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
             <div className="flex gap-y-2 md:items-center justify-between flex-col md:flex-row text-xs mt-1 border-b pb-3 text-accent">
               <div className="flex md:items-center flex-col md:flex-row gap-2">
                 <span>What's Included:</span>
-                <span className="w-[13rem] truncate">
+                <span className="w-[6rem] xl:w-[13rem] truncate">
                   {data.shortDescription}
                 </span>
                 <Tooltip title={data.shortDescription}>
@@ -128,7 +128,7 @@ export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
         <div
           className={`${
             isFavorite ? "bg-red-100" : "bg-blue-100"
-          }  flex justify-center py-2 items-center px-3 cursor-pointer`}
+          }  flex justify-center py-2 items-center w-full md:w-[3.5rem] cursor-pointer`}
           onClick={handleToggleFavorite}
         >
           {isFavorite ? (

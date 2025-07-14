@@ -52,23 +52,23 @@ export const HotelFeatureCard: React.FC<HotelCardProps> = ({ hotel }) => {
               autoplay={true}
               slidesToShow={1}
               slidesToScroll={1}
-              className="md:w-[10rem] w-full h-full rounded border overflow-hidden"
+              className="md:w-[10rem] w-full h-full rounded  overflow-hidden"
             >
               {hotel.property.photoUrls.map((imgUrl: string, index: number) => (
                 <img
                   key={index}
                   src={imgUrl}
                   alt={`Hotel Image ${index + 1}`}
-                  className="object-cover w-full h-full md:h-[13rem]"
+                  className="object-cover rounded w-full h-full md:h-[18rem] lg:h-[12.2rem]"
                 />
               ))}
             </Slider>
           </div>
           <div className="flex-1 flex flex-col justify-between px-3 py-2 gap-2">
-            <div className="flex flex-col md:flex-row justify-between w-full gap-2 font-medium">
+            <div className="flex flex-col lg:flex-row justify-between w-full gap-2 font-medium">
               <div>
                 <h3 className="font-semibold text-sm">{hotel.property.name}</h3>
-                <div className="w-[22rem]">
+                <div className="md:w-[22rem]">
                   <p className="text-xs pt-1 break-all">
                     {address || "Loading address..."}
                   </p>
@@ -98,7 +98,7 @@ export const HotelFeatureCard: React.FC<HotelCardProps> = ({ hotel }) => {
                 </p>
               </div>
             </div>
-            <div className="text-xs flex md:mt-4 mt-0 items-center gap-3 text-accent border-b pb-3">
+            <div className="text-xs flex md:mt-4 mt-2 items-center gap-3 text-accent border-b pb-3">
               <div className="text-primary cursor-pointer flex items-center gap-1">
                 <Icon icon="mingcute:location-line" width="17" height="17" />
                 <span className=""> show in map</span>
@@ -119,8 +119,8 @@ export const HotelFeatureCard: React.FC<HotelCardProps> = ({ hotel }) => {
                 <span>King size room</span>
               </div>
             </div>
-            <div className="flex gap-y-2 md:items-center justify-between flex-col md:flex-row text-xs mt-1 border-b pb-3 text-accent">
-              <div className="flex md:items-center flex-col md:flex-row gap-2">
+            <div className="flex gap-y-2 lg:items-center justify-between flex-col lg:flex-row text-xs mt-1 border-b pb-3 text-accent">
+              <div className="flex md:items-center flex-row gap-2">
                 <span>Facilities:</span>
                 <Icon
                   icon="streamline-plump:pool-ladder-solid"
@@ -135,13 +135,17 @@ export const HotelFeatureCard: React.FC<HotelCardProps> = ({ hotel }) => {
                 />
                 <span>Bar</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Icon icon="lucide:calendar" width="14" height="14" />
-                <span className="mr-2">
-                  Check In: {hotel.property.checkinDate}
-                </span>
-                <Icon icon="lucide:calendar" width="14" height="14" />
-                <span>Check Out: {hotel.property.checkoutDate}</span>
+              <div className="flex flex-col md:flex-row md:items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <Icon icon="lucide:calendar" width="14" height="14" />
+                  <span className="mr-2">
+                    Check In: {hotel.property.checkinDate}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon icon="lucide:calendar" width="14" height="14" />
+                  <span>Check Out: {hotel.property.checkoutDate}</span>
+                </div>
               </div>
             </div>
             <div className="text-xs mt-1 flex items-center text-primary justify-between">
@@ -155,7 +159,7 @@ export const HotelFeatureCard: React.FC<HotelCardProps> = ({ hotel }) => {
         <div
           className={`${
             isFavorite ? "bg-red-100" : "bg-blue-100"
-          }  flex justify-center py-2 items-center px-3 cursor-pointer`}
+          }  flex justify-center py-2 items-center w-full md:w-[3.5rem] cursor-pointer`}
           onClick={handleToggleFavorite}
         >
           {isFavorite ? (
