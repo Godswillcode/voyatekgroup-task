@@ -15,7 +15,7 @@ export const useGetAttractions = (
   params: AttractionsParams | null,
 ) => {
   return useQuery({
-    queryKey: ["hotels", params],
+    queryKey: ["activities", params],
     queryFn: async () => {
       const response = await axiosInstance.get(
         "/attraction/searchAttractions",

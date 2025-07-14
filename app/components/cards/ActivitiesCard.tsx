@@ -3,7 +3,7 @@ import { OnEmpty } from "../Empty";
 import emptyActivities from "../../images/emptyActivity.png";
 import { CardWrapper } from "./CardWrapper";
 import { AttractionFeatureCard } from "../featureMainCard/AttractionFeatureCard";
-import { useActivityItinerary } from "@/app/hooks/useActivityItinerary";
+import { useActivityItinerary } from "@/app/hooks/utils/useActivityItinerary";
 
 export const ActivitiesCard = () => {
   const {

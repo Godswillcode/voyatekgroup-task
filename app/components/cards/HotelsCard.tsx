@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { CardWrapper } from "./CardWrapper";
 import { OnEmpty } from "../Empty";
 import hotelsEmpty from "../../images/HotelE.png";
-import { useHotelItinerary } from "@/app/hooks/useHotelItinerary";
+import { useHotelItinerary } from "@/app/hooks/utils/useHotelItinerary";
 import { HotelFeatureCard } from "../featureMainCard/HotelFeatureCard";
 
 export const HotelsCard = () => {

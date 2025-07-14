@@ -8,7 +8,7 @@ import {
   generalValidationRules,
 } from "../lib/validations";
 import { useGetHotels } from "../hooks/useGetHotels";
-import { usePagination } from "../hooks/usePagination";
+import { usePagination } from "../hooks/utils/usePagination";
 import { HotelFeatureCard } from "../components/featureMainCard/HotelFeatureCard";
 
 export default function HotelPage() {

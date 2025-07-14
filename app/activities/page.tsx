@@ -3,7 +3,7 @@
 import { DatePicker, Form, InputNumber, Pagination, Select } from "antd";
 import React, { useState } from "react";
 import { useGetAttractions } from "../hooks/useGetAttractions";
-import { usePagination } from "../hooks/usePagination";
+import { usePagination } from "../hooks/utils/usePagination";
 import { AttractionFeatureCard } from "../components/featureMainCard/AttractionFeatureCard";
 
 const ActivitiesPage = () => {

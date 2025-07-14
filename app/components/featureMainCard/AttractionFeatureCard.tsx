@@ -7,7 +7,7 @@ import { Icon } from "@iconify/react";
 import { useCurrencyFormatter } from "@/app/lib/useCurrencyFormatter";
 import { message as antdMessage, Button, Tooltip } from "antd";
 import { IAttractionItem } from "@/app/types/attractions";
-import { useActivityItinerary } from "@/app/hooks/useActivityItinerary";
+import { useActivityItinerary } from "@/app/hooks/utils/useActivityItinerary";
 
 interface ActivityCardProps {
   data: IAttractionItem;

@@ -5,11 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Icon } from "@iconify/react";
-import { useReverseGeocode } from "@/app/hooks/useReverseGeocode";
+import { useReverseGeocode } from "@/app/hooks/utils/useReverseGeocode";
 import { useCurrencyFormatter } from "@/app/lib/useCurrencyFormatter";
 import { getNightsStay } from "@/app/lib/getNightsStay";
 import { IHotelItem } from "@/app/types/hotels";
-import { useHotelItinerary } from "@/app/hooks/useHotelItinerary";
+import { useHotelItinerary } from "@/app/hooks/utils/useHotelItinerary";
 import { message as antdMessage } from "antd";
 interface HotelCardProps {
   hotel: IHotelItem;
