@@ -1,11 +1,11 @@
 import React from "react";
 import { Dropdown } from "antd";
 import { Icon } from "@iconify/react";
-import { navbarLink } from "@/app/constant";
+import { extraMenuLink, navbarLink } from "@/app/constant";
 import { sidebarLink } from "@/app/constant"; 
 
 export const MobileMenu = () => {
-  const allLinks = [...navbarLink, ...sidebarLink];
+  const allLinks = [...extraMenuLink,...navbarLink, ...sidebarLink];
 
   const menuItems = allLinks.map((item, index) => ({
     key: index.toString(),

@@ -17,7 +17,7 @@ export default function Home() {
       <Image
         src={banner}
         alt="trip-banner"
-        className="w-full h-8 lg:h-[10rem]"
+        className="w-full h-[7rem] lg:h-[10rem]"
       />
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6">

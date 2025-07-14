@@ -108,5 +108,21 @@ export const sidebarLink = [
   },
 ]
 
+export const extraMenuLink = [
+  {
+    name: "User Profile",
+    href: "/user-profile",
+    icon: "ant-design:user-outlined",
+    clickable: false,
+  },
+  {
+    name: "Subscribe",
+    href: "/subscribe",
+    icon: "material-symbols-light:unsubscribe-outline",
+    clickable: false,
+  },
+]
+
 // page size for pagination
 export const PAGE_SIZE = 5;
+
