@@ -47,7 +47,7 @@ export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
             <img
               src={data.primaryPhoto.small}
               alt={`Activity Image ${data.name}`}
-              className="object-cover w-full h-full md:h-[12rem]"
+              className="object-cover rounded w-full h-full md:h-[12rem]"
             />
           </div>
           <div className="flex-1 flex flex-col justify-between px-3 pt-2 gap-2">
