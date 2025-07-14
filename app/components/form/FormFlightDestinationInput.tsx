@@ -30,7 +30,7 @@ export const FormFlightDestinationInput: React.FC<{
       rules={generalValidationRules}
     >
       <Select
-        placeholder="Select"
+        placeholder="Destination"
         loading={isFetching}
         showSearch
         allowClear
@@ -42,6 +42,7 @@ export const FormFlightDestinationInput: React.FC<{
         notFoundContent={
           isFetching ? <Spin size="small" /> : "No destinations found"
         }
+    
       >
         {data?.data.map((item) => (
           <Select.Option value={item.id} key={item.id}>

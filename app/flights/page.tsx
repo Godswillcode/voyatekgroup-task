@@ -8,12 +8,32 @@ import {
   dateMustBeTodayOrFutureRule,
   generalValidationRules,
 } from "../lib/validations";
+import { useGetFlights } from "../hooks/flights/useGetFlights";
+import { usePagination } from "../hooks/utils/usePagination";
 
 const FlightPage = () => {
   const [tripType, setTripType] = useState<"One Way" | "Round Trip">("One Way");
+  const form = Form.useFormInstance();
+ const [searchParams, setSearchParams] = useState<any>(null);
+  const {data, error, isLoading} = useGetFlights(searchParams, !!searchParams)
+  
+console.log("data", data?.data.flightOffers);
 
   const onFinish = (values: any) => {
-    console.log(values);
+    const return_date = values?.returnDate?.format("YYYY-MM-DD");
+    const departure_date = values?.departDate.format("YYYY-MM-DD");
+
+    const params = {
+      fromId: values.fromId,
+      toId: values.toId,
+      cabinClass: values.cabinClass,
+      departDate: departure_date,
+      returnDate: tripType === "Round Trip" ? return_date : undefined,
+      adults: values.adults,
+      children_age: values.children_age || "",
+    };
+
+    setSearchParams(params);
   };
 
   return (
@@ -26,16 +46,45 @@ const FlightPage = () => {
       />
 
       <div className="border rounded-md p-3">
-        <Form onFinish={onFinish} layout="vertical" requiredMark={false}>
+        <Form
+          form={form}
+          onFinish={onFinish}
+          layout="vertical"
+          requiredMark={false}
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4">
             <FormFlightDestinationInput
               Form={Form}
               control={{ label: "Departing", name: "fromId" }}
             />
-            <FormFlightDestinationInput
-              Form={Form}
-              control={{ label: "Arriving", name: "toId" }}
-            />
+            <Form.Item
+              name="toId"
+              label=""
+              dependencies={["fromId"]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please select an arrival destination",
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("fromId") !== value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        "Arrival destination cannot be the same as departure"
+                      )
+                    );
+                  },
+                }),
+              ]}
+            >
+              <FormFlightDestinationInput
+                Form={Form}
+                control={{ label: "Arriving", name: "toId" }}
+              />
+            </Form.Item>
 
             <Form.Item
               name="departDate"
@@ -72,7 +121,7 @@ const FlightPage = () => {
 
             <Form.Item
               name="children"
-               label="Children"
+              label="Children"
               tooltip="Age of children (if any)"
               rules={childrenAgeValidationRule}
             >
@@ -102,6 +151,10 @@ const FlightPage = () => {
             </button>
           </div>
         </Form>
+      </div>
+      <div className="mt-6">
+        {isLoading && <p>Loading flight...</p>}
+        {error && <p className="text-red-500">Failed to fetch flights</p>}
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ interface UseHotelsParams {
   room_qty: number;
   page_number?: number;
   children_age?: string;
-  location?: string;
 }
 
 export const useGetHotels = (params: UseHotelsParams | null, enabled = true) => {
@@ -28,7 +27,6 @@ export const useGetHotels = (params: UseHotelsParams | null, enabled = true) => 
           units: "metric",
           temperature_unit: "c",
           languagecode: "en-us",
-          location: "US",
         },
       });
      const res = response.data as IHotel;
