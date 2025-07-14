@@ -75,3 +75,17 @@ export const isDateGreaterThanOrEqualToCurrentDay = (date: Dayjs) => {
     },
   };
   
+  export const dateMustBeTodayOrFutureRule: Rule = {
+    validator: (_, value: Dayjs) => {
+      if (!value) {
+        return Promise.reject(new Error("Please select a date"));
+      }
+  
+      const today = dayjs().startOf("day");
+      if (value.isSameOrAfter(today, "day")) {
+        return Promise.resolve();
+      }
+  
+      return Promise.reject(new Error("Date must be today or a future date"));
+    },
+  };

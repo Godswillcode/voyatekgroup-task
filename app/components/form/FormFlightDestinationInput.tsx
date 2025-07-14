@@ -4,7 +4,7 @@ import { generalValidationRules } from "@/app/lib/validations";
 import { Select, Form, Spin } from "antd";
 import { useState } from "react";
 
-export const FormEventInput: React.FC<{
+export const FormFlightDestinationInput: React.FC<{
   Form: typeof Form;
   control?: { label: string; name: string | (string | number)[] };
   showLabel?: boolean;
@@ -12,9 +12,12 @@ export const FormEventInput: React.FC<{
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm: string = useDebounce<string>(searchTerm);
 
-  const { data, isFetching, isSuccess } = useGetFlightDestination({
-    query: debouncedSearchTerm,
-  });
+  const { data, isFetching } = useGetFlightDestination(
+    {
+      query: debouncedSearchTerm,
+    },
+    debouncedSearchTerm.length > 0
+  );
 
   const handleSearch = (val: string) => {
     setSearchTerm(val);
@@ -36,14 +39,15 @@ export const FormEventInput: React.FC<{
         className="rounded border-slate-400 w-full"
         defaultActiveFirstOption={false}
         filterOption={false}
+        notFoundContent={
+          isFetching ? <Spin size="small" /> : "No destinations found"
+        }
       >
-        {isSuccess ? (
-          [].map((item) => <Select.Option>Test</Select.Option>)
-        ) : (
-          <div className="flex justify-center items-center w-full">
-            <Spin size="small" />
-          </div>
-        )}
+        {data?.data.map((item) => (
+          <Select.Option value={item.id} key={item.id}>
+            {item.name}
+          </Select.Option>
+        ))}
       </Select>
     </Form.Item>
   );
