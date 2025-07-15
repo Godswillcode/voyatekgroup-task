@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { DatePicker, Form, Input, InputNumber, Segmented, Select } from "antd";
+import { DatePicker, Form, Input, InputNumber, Pagination, Segmented, Select } from "antd";
 import { FormFlightDestinationInput } from "../components/form/FormFlightDestinationInput";
 import {
   childrenAgeValidationRule,
@@ -10,14 +10,20 @@ import {
 } from "../lib/validations";
 import { useGetFlights } from "../hooks/flights/useGetFlights";
 import { usePagination } from "../hooks/utils/usePagination";
+import { FlightFeatureCard } from "../components/featureMainCard/FlightFeatureCard";
 
 const FlightPage = () => {
   const [tripType, setTripType] = useState<"One Way" | "Round Trip">("One Way");
   const form = Form.useFormInstance();
  const [searchParams, setSearchParams] = useState<any>(null);
   const {data, error, isLoading} = useGetFlights(searchParams, !!searchParams)
+
+    const flights = data?.data?.flightOffers || [];
   
-console.log("data", data?.data.flightOffers);
+    const { currentPage, paginatedData, changePage, totalItems } = usePagination(
+      flights,
+      5
+    );
 
   const onFinish = (values: any) => {
     const return_date = values?.returnDate?.format("YYYY-MM-DD");
@@ -156,6 +162,28 @@ console.log("data", data?.data.flightOffers);
         {isLoading && <p>Loading flight...</p>}
         {error && <p className="text-red-500">Failed to fetch flights</p>}
       </div>
+
+         {/* Data display */}
+         {paginatedData.length > 0 ? (
+        <div className="mt-4">
+          {paginatedData.map((activity) => (
+            <FlightFeatureCard  key={activity.token} data={activity} />
+          ))}
+
+          <div className="flex justify-center mt-8">
+            <Pagination
+              current={currentPage}
+              total={totalItems}
+              pageSize={10}
+              onChange={changePage}
+            />
+          </div>
+        </div>
+      ) : (
+        !isLoading && <div></div>
+      )}
+
+     
     </div>
   );
 };
