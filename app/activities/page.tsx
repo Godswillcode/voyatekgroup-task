@@ -9,7 +9,7 @@ import { FormAttractionDestinationInput } from "../components/form/FormAttractio
 
 const ActivitiesPage = () => {
   const [searchParams, setSearchParams] = useState<any>(null);
-  const { data, isLoading, error } = useGetAttractions(searchParams);
+  const { data, isLoading, error } = useGetAttractions(searchParams, !!searchParams);
 
   const activities = data?.data?.products || [];
 
@@ -65,7 +65,7 @@ const ActivitiesPage = () => {
               type="submit"
               className="w-[10rem] bg-primary text-white px-4 pt-1 pb-2 rounded"
             >
-              Filter
+              Search
             </button>
           </div>
         </Form>

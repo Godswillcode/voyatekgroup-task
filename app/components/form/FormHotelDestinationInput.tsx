@@ -27,7 +27,7 @@ export const FormHotelDestinationInput: React.FC<{
   return (
     <Form.Item
       name={control?.name ?? "dest_id"}
-      label={showLabel ? control?.label ?? "Select Destination" : null}
+      label={showLabel ? control?.label ?? "Select Destination (optional)" : null}
     //   rules={generalValidationRules}
     >
       <Select

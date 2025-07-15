@@ -113,7 +113,7 @@ export default function HotelPage() {
           </div>
         </div>
       ) : (
-        !isLoading && <div>No data</div>
+        !isLoading && <div></div>
       )}
     </div>
   );

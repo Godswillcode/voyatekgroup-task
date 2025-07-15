@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePicker, Form, Input, InputNumber, Pagination, Segmented, Select } from "antd";
 import { FormFlightDestinationInput } from "../components/form/FormFlightDestinationInput";
 import {
@@ -14,16 +14,23 @@ import { FlightFeatureCard } from "../components/featureMainCard/FlightFeatureCa
 
 const FlightPage = () => {
   const [tripType, setTripType] = useState<"One Way" | "Round Trip">("One Way");
-  const form = Form.useFormInstance();
- const [searchParams, setSearchParams] = useState<any>(null);
-  const {data, error, isLoading} = useGetFlights(searchParams, !!searchParams)
+  const [form] = Form.useForm();
+  const [searchParams, setSearchParams] = useState<any>(null);
 
-    const flights = data?.data?.flightOffers || [];
-  
-    const { currentPage, paginatedData, changePage, totalItems } = usePagination(
-      flights,
-      5
-    );
+  const { data, error, isLoading } = useGetFlights(searchParams, !!searchParams);
+
+  const flights = data?.data?.flightOffers || [];
+
+  const noFlightFound =
+    !!(data?.data as any)?.error?.code &&
+    (data?.data as any)?.error?.code === "SEARCH_SEARCHFLIGHTS_NO_FLIGHTS_FOUND";
+
+  const { currentPage, paginatedData, changePage, totalItems } = usePagination(flights, 5);
+
+  useEffect(() => {
+    form.resetFields();
+    setSearchParams(null);
+  }, [tripType]);
 
   const onFinish = (values: any) => {
     const return_date = values?.returnDate?.format("YYYY-MM-DD");
@@ -68,19 +75,14 @@ const FlightPage = () => {
               label=""
               dependencies={["fromId"]}
               rules={[
-                {
-                  required: true,
-                  message: "Please select an arrival destination",
-                },
+                { required: true, message: "Please select an arrival destination" },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (!value || getFieldValue("fromId") !== value) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error(
-                        "Arrival destination cannot be the same as departure"
-                      )
+                      new Error("Arrival destination cannot be the same as departure")
                     );
                   },
                 }),
@@ -101,6 +103,7 @@ const FlightPage = () => {
               <DatePicker className="w-full" />
             </Form.Item>
           </div>
+
           <div
             className={`grid grid-cols-1 md:grid-cols-2 ${
               tripType === "Round Trip" ? "lg:grid-cols-4" : "lg:grid-cols-3"
@@ -158,32 +161,33 @@ const FlightPage = () => {
           </div>
         </Form>
       </div>
+
       <div className="mt-6">
-        {isLoading && <p>Loading flight...</p>}
+        {isLoading && <p>Loading flights...</p>}
+
         {error && <p className="text-red-500">Failed to fetch flights</p>}
-      </div>
 
-         {/* Data display */}
-         {paginatedData.length > 0 ? (
-        <div className="mt-4">
-          {paginatedData.map((activity) => (
-            <FlightFeatureCard  key={activity.token} data={activity} />
-          ))}
+        {!isLoading && noFlightFound && (
+          <p className="text-gray-500 text-center mt-6">No flights found for this search.</p>
+        )}
 
-          <div className="flex justify-center mt-8">
-            <Pagination
-              current={currentPage}
-              total={totalItems}
-              pageSize={10}
-              onChange={changePage}
-            />
+        {!isLoading && !noFlightFound && paginatedData.length > 0 && (
+          <div className="mt-4">
+            {paginatedData.map((activity) => (
+              <FlightFeatureCard key={activity.token} data={activity} />
+            ))}
+
+            <div className="flex justify-center mt-8">
+              <Pagination
+                current={currentPage}
+                total={totalItems}
+                pageSize={10}
+                onChange={changePage}
+              />
+            </div>
           </div>
-        </div>
-      ) : (
-        !isLoading && <div></div>
-      )}
-
-     
+        )}
+      </div>
     </div>
   );
 };
