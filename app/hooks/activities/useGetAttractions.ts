@@ -9,6 +9,7 @@ interface AttractionsParams {
   endDate?: string;
   sortBy?: string;
   priceFilters?: number | string;
+  id: string;
 }
 
 export const useGetAttractions = (
@@ -22,7 +23,6 @@ export const useGetAttractions = (
         {
           params: {
             ...params,
-            id: "eyJ1ZmkiOi0yMDkyMTc0fQ==",
             page: 1,
             currency_code: "USD",
             languagecode: "en-us",

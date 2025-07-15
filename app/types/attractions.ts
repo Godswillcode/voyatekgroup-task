@@ -58,3 +58,12 @@ export interface IAttraction {
     }[];
   }
   
+  export interface IAttractionLocation {
+    data: {
+        products: {
+            id: string;
+            title: string;
+        }[]
+    };
+  }
+  

@@ -44,9 +44,9 @@ export const FormAttractionDestinationInput: React.FC<{
         }
     
       >
-        {data?.data.map((item) => (
+        {data?.data?.products?.map((item) => (
           <Select.Option value={item.id} key={item.id}>
-            {item.name}
+            {item.title}
           </Select.Option>
         ))}
       </Select>

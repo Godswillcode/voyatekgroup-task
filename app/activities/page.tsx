@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useGetAttractions } from "../hooks/activities/useGetAttractions";
 import { usePagination } from "../hooks/utils/usePagination";
 import { AttractionFeatureCard } from "../components/featureMainCard/AttractionFeatureCard";
+import { FormAttractionDestinationInput } from "../components/form/FormAttractionDestinationInput";
 
 const ActivitiesPage = () => {
   const [searchParams, setSearchParams] = useState<any>(null);
@@ -22,11 +23,11 @@ const ActivitiesPage = () => {
     const end_date = values?.date?.[1]?.format("YYYY-MM-DD");
 
     const params = {
-      page: 1,
       start_date,
       end_date,
       sort_by: values.sortBy,
       price_filters: values.priceFilters,
+      id: values.locationId,
     };
 
     setSearchParams(params);
@@ -37,6 +38,7 @@ const ActivitiesPage = () => {
       <div className="border rounded-md p-3">
         <Form onFinish={onFinish} layout="vertical" requiredMark={false}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4">
+            <FormAttractionDestinationInput Form={Form}/>
             <Form.Item name="date" label="Select Date" className="w-full">
               <DatePicker.RangePicker
                 placeholder={["Start Date", "End Date"]}

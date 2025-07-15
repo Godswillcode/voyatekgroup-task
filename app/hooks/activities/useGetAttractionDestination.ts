@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../axiosInstance";
-import { IDestination, IFlightDestination } from "@/app/types/flight";
+import { IAttractionLocation } from "@/app/types/attractions";
 
 interface destinationParams {
   query: string;
@@ -20,7 +20,7 @@ export const useGetAttractionDestination = (
           ...params,
         },
       });
-      const res = response.data as IDestination;
+      const res = response.data as IAttractionLocation;
       return res;
     },
     enabled,
