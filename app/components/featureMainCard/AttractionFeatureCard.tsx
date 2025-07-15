@@ -61,8 +61,8 @@ export const AttractionFeatureCard: React.FC<ActivityCardProps> = ({
               <div className="text-xs">
                 <h3 className="font-semibold text-lg">
                   {formatCurrency(
-                    data.representativePrice.publicAmount,
-                    data.representativePrice.currency
+                    data.representativePrice.publicAmount??0,
+                    data.representativePrice.currency??"USD"
                   )}
                 </h3>
                 <p>10:30 AM on Mar 19</p>

@@ -7,9 +7,10 @@ import {
   dateRangeHasToBeGreaterThanOrEqualToCurrentDayRule,
   generalValidationRules,
 } from "../lib/validations";
-import { useGetHotels } from "../hooks/useGetHotels";
+import { useGetHotels } from "../hooks/hotel/useGetHotels";
 import { usePagination } from "../hooks/utils/usePagination";
 import { HotelFeatureCard } from "../components/featureMainCard/HotelFeatureCard";
+import { FormHotelDestinationInput } from "../components/form/FormHotelDestinationInput";
 
 export default function HotelPage() {
   const [searchParams, setSearchParams] = useState<any>(null);
@@ -27,7 +28,7 @@ export default function HotelPage() {
     const departure_date = values?.date?.[1]?.format("YYYY-MM-DD");
 
     const params = {
-      page: 1,
+      dest_id: values.dest_id,
       arrival_date,
       departure_date,
       adults: values.adults,
@@ -42,12 +43,12 @@ export default function HotelPage() {
     <div>
       <div className="border rounded-md p-3">
         <Form onFinish={onFinish} layout="vertical" requiredMark={false}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4">
+            <FormHotelDestinationInput Form={Form}/>
             <Form.Item
               name="date"
               label="Select Date"
               rules={[dateRangeHasToBeGreaterThanOrEqualToCurrentDayRule]}
-              className="lg:col-span-3 w-full"
             >
               <DatePicker.RangePicker
                 placeholder={["Arrival", "Departure"]}
@@ -112,7 +113,7 @@ export default function HotelPage() {
           </div>
         </div>
       ) : (
-        !isLoading && <div></div>
+        !isLoading && <div>No data</div>
       )}
     </div>
   );
