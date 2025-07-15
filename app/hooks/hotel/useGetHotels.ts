@@ -10,16 +10,19 @@ interface UseHotelsParams {
   adults: number;
   room_qty: number;
   children_age?: string;
-  dest_id: string;
 }
 
-export const useGetHotels = (params: UseHotelsParams | null, enabled = true) => {
+export const useGetHotels = (
+  params: UseHotelsParams | null,
+  enabled = true
+) => {
   return useQuery({
     queryKey: ["hotels", params],
     queryFn: async () => {
       const response = await axiosInstance.get("/hotels/searchHotels", {
         params: {
           ...params,
+          dest_id: "-2092174",
           search_type: "CITY",
           page_number: 1,
           currency_code: "USD",
@@ -28,7 +31,7 @@ export const useGetHotels = (params: UseHotelsParams | null, enabled = true) => 
           languagecode: "en-us",
         },
       });
-     const res = response.data as IHotel;
+      const res = response.data as IHotel;
       return res;
     },
     enabled,

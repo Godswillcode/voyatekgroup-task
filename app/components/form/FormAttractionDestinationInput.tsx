@@ -1,11 +1,10 @@
-import { useGetFlightDestination } from "@/app/hooks/flights/useGetFlightDestination";
-import { useGetHotelDestination } from "@/app/hooks/hotel/useGetHotelDestination";
+import { useGetAttractionDestination } from "@/app/hooks/activities/useGetAttractionDestination";
 import { useDebounce } from "@/app/hooks/utils/useDebounce";
 import { generalValidationRules } from "@/app/lib/validations";
 import { Select, Form, Spin } from "antd";
 import { useState } from "react";
 
-export const FormHotelDestinationInput: React.FC<{
+export const FormAttractionDestinationInput: React.FC<{
   Form: typeof Form;
   control?: { label: string; name: string | (string | number)[] };
   showLabel?: boolean;
@@ -13,7 +12,7 @@ export const FormHotelDestinationInput: React.FC<{
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm: string = useDebounce<string>(searchTerm);
 
-  const { data, isFetching } = useGetHotelDestination(
+  const { data, isFetching } = useGetAttractionDestination(
     {
       query: debouncedSearchTerm,
     },
@@ -26,12 +25,12 @@ export const FormHotelDestinationInput: React.FC<{
 
   return (
     <Form.Item
-      name={control?.name ?? "dest_id"}
-      label={showLabel ? control?.label ?? "Select Destination" : null}
-    //   rules={generalValidationRules}
+      name={control?.name ?? "locationId"}
+      label={showLabel ? control?.label ?? "Attraction Location" : null}
+      rules={generalValidationRules}
     >
       <Select
-        placeholder="Destination"
+        placeholder="Location"
         loading={isFetching}
         showSearch
         allowClear
@@ -41,12 +40,12 @@ export const FormHotelDestinationInput: React.FC<{
         defaultActiveFirstOption={false}
         filterOption={false}
         notFoundContent={
-          isFetching ? <Spin size="small" /> : "No destinations found"
+          isFetching ? <Spin size="small" /> : "No location found"
         }
     
       >
         {data?.data.map((item) => (
-          <Select.Option value={item.dest_id} key={item.dest_id}>
+          <Select.Option value={item.id} key={item.id}>
             {item.name}
           </Select.Option>
         ))}

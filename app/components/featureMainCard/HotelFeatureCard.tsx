@@ -77,15 +77,15 @@ export const HotelFeatureCard: React.FC<HotelCardProps> = ({ hotel }) => {
               <div className="text-xs">
                 <h3 className="font-semibold text-lg">
                   {formatCurrency(
-                    hotel.property.priceBreakdown.excludedPrice.value??0,
-                    hotel.property.priceBreakdown.excludedPrice.currency??"USD"
+                    hotel?.property?.priceBreakdown?.excludedPrice?.value??0,
+                    hotel?.property?.priceBreakdown?.excludedPrice?.currency??"USD"
                   )}
                 </h3>
                 <p>
                   Total Price: &nbsp;
                   {formatCurrency(
-                    hotel.property.priceBreakdown.grossPrice.value??0,
-                    hotel.property.priceBreakdown.grossPrice.currency??"USD"
+                    hotel?.property?.priceBreakdown?.grossPrice?.value??0,
+                    hotel?.property?.priceBreakdown?.grossPrice?.currency??"USD"
                   )}
                 </p>
                 <p>

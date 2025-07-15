@@ -129,8 +129,8 @@ export const FlightFeatureCard: React.FC<FlightCardProps> = ({ data }) => {
                 <div className="text-xs">
                   <h3 className="font-semibold text-lg">
                     {formatCurrency(
-                      data.priceBreakdown.total.units??0,
-                      data.priceBreakdown.total.currencyCode?? "USD"
+                      data?.priceBreakdown?.total?.units??0,
+                      data?.priceBreakdown?.total?.currencyCode?? "USD"
                     )}
                   </h3>
                 </div>

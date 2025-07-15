@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "./axiosInstance";
-import { IAttraction } from "../types/attractions";
+import { axiosInstance } from "../axiosInstance";
+import { IAttraction } from "../../types/attractions";
 
 interface AttractionsParams {
   startDate?: string;
